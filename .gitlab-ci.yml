@@ -36,21 +36,13 @@ publish:
 deploy to dev:
     stage: deploy
     script:
-<<<<<<< HEAD
         - echo 'Deploying to dev...'
-=======
-        - echo 'deploying to dev...'
->>>>>>> b520008ebb7f011622d9e2cddeb822ab5f4529ea
     when: manual
 
 deploy to prod:
     stage: deploy
     script:
-<<<<<<< HEAD
         - echo 'Deploying to prod...'
-=======
-        - echo 'deploying to prod...'
->>>>>>> b520008ebb7f011622d9e2cddeb822ab5f4529ea
     when: manual
     only:
       refs:
