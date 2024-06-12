@@ -1,0 +1,51 @@
+stages:
+    - build
+    - test
+    - publish
+    - deploy
+
+image: maven    
+
+build application:
+    stage: build
+    script:
+        - echo "Build application version ${CI_COMMIT_REF_SLUG} at ${CI_COMMIT_SHORT_SHA} commit   
+        - mvn compile
+        - echo 'building successful'
+
+test on docker:
+    stage: test
+    script:
+        - echo "Test ${CI_JOB_ID}"
+        - mvn test
+    tags:
+        - docker
+
+test in window:
+    stage: test
+    script:
+        - echo "Test ${CI_JOB_ID}"
+        -mvn test
+    tags:
+        - window  
+
+publish:
+    stage: publish
+    script: mvn package
+
+deploy to dev:
+    stage: deploy
+    script:
+        - echo 'Deploying to dev...'
+    when: manual
+
+deploy to prod:
+    stage: deploy
+    script:
+        - echo 'Deploying to prod...'
+    when: manual
+    only:
+      refs:
+        - main
+        - tags
+
